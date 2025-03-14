@@ -19,6 +19,21 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y gcc make
 
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/local/include/check.h   # Caching check.h header
+            /usr/local/lib/*check*       # Caching compiled check library
+            src/*.o                      # Cache object files for faster compilation
+          key: ${{ runner.os }}-check-${{ hashFiles('**/Makefile') }}
+          restore-keys: |
+            ${{ runner.os }}-check-
+
+      - name: Install check library
+        run: sudo apt-get install -y check
+      
+
       - name: Compile program
         run: make
         working-directory: src  # Specify src as the working directory

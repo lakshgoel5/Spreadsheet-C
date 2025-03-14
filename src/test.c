@@ -1,7 +1,3 @@
-
-
-
-
 #include <check.h>
 #include "parser.h"
 #include "validate.h"
