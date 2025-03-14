@@ -22,6 +22,16 @@ jobs:
       - name: Compile program
         run: gcc -o src/a.out src/spreadsheet.c src/graph.c src/parser.c src/validate.c src/hash.c src/vector.c -lm
 
+      - name: List Files for Debugging
+        run: ls -R src
+      
+      - name: Ensure Executable Permissions
+        run: chmod +x src/a.out
+      
+      - name: Debug Execution
+        run: ./src/a.out < src/test_input.txt || echo "Program failed with exit code $?"
+      
+
       - name: Run Tests
         run: ./src/a.out < src/test_input.txt > src/output.txt
 
