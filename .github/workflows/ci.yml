@@ -16,9 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y gcc make
-
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
@@ -29,6 +26,10 @@ jobs:
           key: ${{ runner.os }}-check-${{ hashFiles('**/Makefile') }}
           restore-keys: |
             ${{ runner.os }}-check-
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc make
+
 
       - name: Install check library
         run: sudo apt-get install -y check
