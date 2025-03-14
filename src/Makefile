@@ -17,7 +17,7 @@ $(DIR):
 	mkdir -p $(DIR)
 
 # Rule to create the executable
-$(TARGET): $(OBJ) $(DIR) clean
+$(TARGET): $(OBJ) $(DIR)
 	@$(CC) $(CFLAGS) -o $(TARGET) $(OBJ) $(END_CFLAGS)
 
 # # Rule to compile .c files into .o files
