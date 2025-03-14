@@ -1,0 +1,119 @@
+                       A           B           C           D           E
+           1           0           0           0           0           0
+           2           0           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0           0
+(ok) > A1=100
+                       A           B           C           D           E
+           1         100           0           0           0           0
+           2           0           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0           0
+(ok) > B1=MAX(A2:E5)
+                       A           B           C           D           E
+           1         100           0           0           0           0
+           2           0           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0           0
+(ok) > A2=MAX(B2:E5)
+                       A           B           C           D           E
+           1         100           0           0           0           0
+           2           0           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0           0
+(ok) > A3=MIN(B2:E5)
+                       A           B           C           D           E
+           1         100           0           0           0           0
+           2           0           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0           0
+(ok) > B2=MIN(C2:E5)
+                       A           B           C           D           E
+           1         100           0           0           0           0
+           2           0           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0           0
+(ok) > A4=SUM(B1:E5)
+                       A           B           C           D           E
+           1         100           0           0           0           0
+           2           0           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0           0
+(cycle not allowed) > A5=AVG(B1:E5)
+                       A           B           C           D           E
+           1         100           0           0           0           0
+           2           0           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0           0
+(cycle not allowed) > E5=6070/A1
+                       A           B           C           D           E
+           1         100          60           0           0           0
+           2          60           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0          60
+(ok) > A1=0
+                       A           B           C           D           E
+           1           0         ERR           0           0           0
+           2         ERR         ERR           0           0           0
+           3         ERR           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0         ERR
+(ok) > C1=2*B1
+                       A           B           C           D           E
+           1           0         ERR         ERR           0           0
+           2         ERR         ERR           0           0           0
+           3         ERR           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0         ERR
+(ok) > D1=45/B2
+                       A           B           C           D           E
+           1           0         ERR         ERR         ERR           0
+           2         ERR         ERR           0           0           0
+           3         ERR           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0         ERR
+(ok) > E1=MAX(C1:C5)
+                       A           B           C           D           E
+           1           0         ERR         ERR         ERR         ERR
+           2         ERR         ERR           0           0           0
+           3         ERR           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0         ERR
+(ok) > A1=45
+                       A           B           C           D           E
+           1          45         134         268         ERR         268
+           2         134           0           0           0           0
+           3           0           0           0           0           0
+           4           0           0           0           0           0
+           5           0           0           0           0         134
+(ok) > E4=6/0
+                       A           B           C           D           E
+           1          45         ERR         ERR         ERR         ERR
+           2         ERR         ERR           0           0           0
+           3         ERR           0           0           0           0
+           4           0           0           0           0         ERR
+           5           0           0           0           0         134
+(ok) > E3=C2/C4
+                       A           B           C           D           E
+           1          45         ERR         ERR         ERR         ERR
+           2         ERR         ERR           0           0           0
+           3         ERR           0           0           0         ERR
+           4           0           0           0           0         ERR
+           5           0           0           0           0         134
+(ok) > E2=C2/0
+                       A           B           C           D           E
+           1          45         ERR         ERR         ERR         ERR
+           2         ERR         ERR           0           0         ERR
+           3         ERR           0           0           0         ERR
+           4           0           0           0           0         ERR
+           5           0           0           0           0         134
+(ok) > 

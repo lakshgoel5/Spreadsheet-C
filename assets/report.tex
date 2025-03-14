@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+% \usepackage{float} % Required for the [H] option in figures
+
+
+% \title{main}
+% \author{cs1230848 }
+% \date{March 2025}
+
+\begin{document}
+
+\title{COP290 C Lab: Spreadsheet}
+\author{\textbf{Laksh Goel (2023CS10848)} 
+\\ \textbf{Adit Jindal (2023CS50626)} \\ \textbf{Yuvika Chaudhary (2023CS10353)}}
+\maketitle
+
+\section{About the Project}
+    We are designing a command-line spreadsheet program that allows users to manage a grid of integer-valued cells interactively. \\
+    Users can set cell values directly or through formulas involving 
+    \begin{enumerate}
+        \item Values such as a Constant or a cell
+        \item Arithmetic expressions
+        \item Functions such as MIN, MAX, SUM, and STDEV. 
+    \end{enumerate}
+    The spreadsheet supports a flexible range of cell references, including one-dimensional and two-dimensional ranges.\\
+    The program provides navigation commands for scrolling through the grid to handle large spreadsheets efficiently. Additionally, the execution time for each command is displayed, and invalid inputs are gracefully handled with error messages. The implementation requires efficient parsing, evaluation of expressions, and real-time updates, ensuring responsiveness and usability.
+    
+\section{Built With}
+This project was built as a submission for COP290: Design Practices. The data structures and concepts used for building this Spreadsheet are:
+\begin{enumerate}
+    \item \textbf{Graph} where each cell represents a Node in the graph. If there is a dependency of Cell1 on Cell2, then these two nodes are connected by a directed edge Cell2 $\rightarrow$ Cell1.
+    \item \textbf{Vector} is used for the lists where we don't know how many elements could be pushed into the list. 
+    \item Concept of \textbf{Hashing} is used for saving the adjacency list of a Node. Amortized time for inserting and removing an element from HashTable is O(1). This reduces the time of execution of the program in comparison to using a Linked List. 
+\end{enumerate}
+
+\section{Architecture}
+
+    \begin{figure}[t]
+    \centering
+    {{\includegraphics[width=9cm]{file_dependencies.jpg}}}
+    \caption{File Dependencies}
+    \end{figure}
+    
+    \begin{figure}[t]
+    \centering
+    \includegraphics[width=15cm]{flow.jpg}
+    \caption{Flow of our program}
+    \end{figure}
+
+
+    The spreadsheet comprises of two main data elements - graph and grid.
+    \begin{enumerate}
+    \item \textbf{graph} : (Graph) A custom struct including a matrix of Nodes, and dimensions- rows and cols.
+    \item \textbf{grid} : (int**) A table of values at Nodes.
+    \item \textbf{Node} : (struct) Custom struct containing the cell's function, inward dependencies (as Coordinates instances), ht for outward dependencies, and validity flag.
+    \item \textbf{value1, value2} : (Coordinates) These are present inside the Node struct, and mark the first and last cells of the range in a function, or the two cells included in the function. In case of constants in the function, these contain the constant value.
+    \item \textbf{ht} : (HashTable*) Pointer to HashTable, used for storing outward dependencies as Coordinates instances inside a hash table.
+    \item \textbf{Coordinates} : (struct) Two ints, holds the position of a cell as row and col.
+    \item \textbf{Hashtable} : (struct) Holds a table of Coordinates pointers, and its current and maximum sizes. It gets resized whenever the occupied space crosses 0.7 times the maximum size. Hash function used for cell (x,y) is $[((x+y)*(x+y+1)/2)+y]\%max\_size. $
+    
+     \end{enumerate}
+\section{Test Suite}
+\begin{enumerate}
+    \item Cycle: Our test suite covers cases of cycle detection in test3.txt.
+    Here the dependencies are : A1$\rightarrow$B1$\rightarrow$C1$\rightarrow$E1
+    As soon as we try to add a dependency from E1$\rightarrow$A1, we get an error of "Cycle not allowed". Further, changing value of A1 without disturbing dependencies works normally as we have appropriately handled cycle detection cases.
+    \item Err: Cases of ERR are covered in test2.txt. Our code is correctly handling division by zero errors in all cases which are checked comprehensively.
+    \item Parser (Out of bound/invalid inputs):  
+    \item SLEEP : Cases of SLEEP are covered in test1.txt. Code is correctly handling cases of SLEEP of constant value, negative value, dependent values and when dependent values involved in SLEEP are changed, time is taken accordingly because every cell will take new time according to the changed values.
+    \item Full Sheet: 
+\end{enumerate}
+
+\section{Challenges Faced}
+\begin{enumerate}
+    \item Choosing the data structure for each cell:
+    We had to decide how to represent our cells in the program. Since we had interdependent connections between cells, Graph with each cell as a node would work well.
+    \item Implementing graph: Deciding what data elements to store in a node, how to reduce memory usage, and implementing functions were a challenge.
+    \item Parsing the commands and validating: We first implemented our program assuming valid arguments are given and parsed them. Later we extended our code to include Validation, if a valid argument is given at all.
+    \item How to get the sequence of nodes to iterate to update their values: To reduce time complexity, we thought of various ways to traversing graph while we had to update cells, and came up with an algorithm in which we will get a sequence of cell, iterating on which would lead to maximum O(r*c) complexity for updating cells.
+    \item Optimizing for time: Used concept of Hashing for storing dependencies of a node.
+    \item optimizing for space: Used Vector to implement a list(return list of topological sort) which had varying size, depending on outward dependencies of a Node.
+    \item Considering format for testing: We explored various tools like Cunit library, but failed. Since a single command runs almost all the functions, we thought of writing a single comprehensive test case where we would show working of all functions. But later we came up with a tool(check library), so we decided to further make unit tests.
+\end{enumerate}
+
+\section{Links}
+\begin{enumerate}
+    \item Github: https://github.com/Adit-Jindal/spreadsheet-c
+    \item Demo: "https://drive.google.com/drive/folders/1jiLZmvZxP4VhzoxIz\_2RHNDPEOpCZPVp?usp=sharing"
+\end{enumerate}
+
+\end{document}
