@@ -51,7 +51,7 @@ report: $(PDF_FILE)
 $(PDF_FILE): report.tex
 	pdflatex report.tex
 
-test: test.c graph.c hash.c parser.c validate.c vector.c
+test: $(TARGET) test.c graph.c hash.c parser.c validate.c vector.c
 	@$(TARGET) test tests/test_12_15.txt > tests/out_12_15.txt
 	@diff -q tests/out_12_15.txt tests/expected_out_12_15.txt
 	@echo "Test case 1 passed"
@@ -74,5 +74,5 @@ test: test.c graph.c hash.c parser.c validate.c vector.c
 		echo "Test 6 passed: Program correctly returned exit code 1"; \
 	fi
 
-	cc -o test test.c graph.c hash.c parser.c validate.c vector.c -lcheck -lm -lsubunit -pthread
+	cc -o test test.c graph.c hash.c parser.c validate.c vector.c $(shell pkg-config --cflags --libs check) -lm
 	./test
